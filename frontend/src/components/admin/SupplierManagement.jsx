@@ -114,9 +114,9 @@ const SupplierManagement = () => {
     // Check if path already contains the directory structure
     let documentPath;
     if (document.path.includes('documents/') || document.path.includes('documents\\')) {
-      documentPath = `http://localhost:500/uploads/${document.path.replace(/^.*documents[/\\]/, 'documents/')}`;
+      documentPath = `http://localhost:5000/uploads/${document.path.replace(/^.*documents[/\\]/, 'documents/')}`;
     } else {
-      documentPath = `http://localhost:500/uploads/documents/${fileName}`;
+      documentPath = `http://localhost:5000/uploads/documents/${fileName}`;
     }
     
     console.log('Original document path:', document.path);

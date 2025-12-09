@@ -132,7 +132,7 @@ export const getFarmersWithProducts = async (req, res) => {
           if (typeof farmerUser.profilePic === 'object' && farmerUser.profilePic.path) {
             // If path starts with '/', prepend the server URL
             if (farmerUser.profilePic.path.startsWith('/')) {
-              profilePicUrl = `http://localhost:500${farmerUser.profilePic.path}`;
+              profilePicUrl = `http://localhost:5000${farmerUser.profilePic.path}`;
             } else if (farmerUser.profilePic.path.startsWith('http')) {
               // If it's already a full URL, use it directly
               profilePicUrl = farmerUser.profilePic.path;
@@ -143,7 +143,7 @@ export const getFarmersWithProducts = async (req, res) => {
           }
         } else if (farmer.sampleProduct.image && farmer.sampleProduct.image.name) {
           // Fallback to product image if no profile pic is available
-          profilePicUrl = `http://localhost:500/uploads/products/${farmer.sampleProduct.image.name}`;
+          profilePicUrl = `http://localhost:5000/uploads/products/${farmer.sampleProduct.image.name}`;
         }
         
         return {

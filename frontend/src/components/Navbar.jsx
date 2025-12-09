@@ -21,7 +21,7 @@ const getProfileImageUrl = (profilePic) => {
     if (profilePic.path.startsWith('http')) return profilePic.path;
     
     // If path is a relative URL (starts with /), prepend the server URL
-    if (profilePic.path.startsWith('/')) return `http://localhost:500${profilePic.path}`;
+    if (profilePic.path.startsWith('/')) return `http://localhost:5000${profilePic.path}`;
   }
   
   // Fallback to default image

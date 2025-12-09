@@ -161,7 +161,7 @@ const AgriInputsSection = ({supplierName}) => {
     // If image is stored with path and name (our multer implementation)
     if (product.image.path && product.image.name) {
       return <img 
-        src={`http://localhost:500/uploads/products/${product.image.name}`} 
+        src={`http://localhost:5000/uploads/products/${product.image.name}`} 
         alt={product.name} 
         onError={(e) => {
           e.target.onerror = null;

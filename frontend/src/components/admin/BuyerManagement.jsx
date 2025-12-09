@@ -94,9 +94,9 @@ const BuyerManagement = () => {
     // Check if path already contains the directory structure
     let imagePath;
     if (image.path.includes('profiles/') || image.path.includes('profiles\\')) {
-      imagePath = `http://localhost:500/uploads/${image.path.replace(/^.*profiles[/\\]/, 'profiles/')}`;
+      imagePath = `http://localhost:5000/uploads/${image.path.replace(/^.*profiles[/\\]/, 'profiles/')}`;
     } else {
-      imagePath = `http://localhost:500/uploads/profiles/${fileName}`;
+      imagePath = `http://localhost:5000/uploads/profiles/${fileName}`;
     }
     
     console.log('Original image path:', image.path);

@@ -133,7 +133,7 @@ export const getSuppliersWithAgriInputs = async (req, res) => {
           if (typeof supplierUser.profilePic === 'object' && supplierUser.profilePic.path) {
             // If path starts with '/', prepend the server URL
             if (supplierUser.profilePic.path.startsWith('/')) {
-              profilePicUrl = `http://localhost:500${supplierUser.profilePic.path}`;
+              profilePicUrl = `http://localhost:5000${supplierUser.profilePic.path}`;
             } else if (supplierUser.profilePic.path.startsWith('http')) {
               // If it's already a full URL, use it directly
               profilePicUrl = supplierUser.profilePic.path;
@@ -144,7 +144,7 @@ export const getSuppliersWithAgriInputs = async (req, res) => {
           }
         } else if (supplier.sampleInput.image && supplier.sampleInput.image.name) {
           // Fallback to input image if no profile pic is available
-          profilePicUrl = `http://localhost:500/uploads/products/${supplier.sampleInput.image.name}`;
+          profilePicUrl = `http://localhost:5000/uploads/products/${supplier.sampleInput.image.name}`;
         }
         
         return {

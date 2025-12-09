@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:500/api/auth"; // Replace with your backend URL
+const API_URL = "http://localhost:5000/api/auth"; // Replace with your backend URL
 // const AGRI_INPUT_URL = "http://localhost:5000/api/agri-inputs"; // URL for agri-inputs endpoints
-const API_URL_AGRI_INPUT = "http://localhost:500/api/agri-inputs";
-const API_URL_PRODUCT = "http://localhost:500/api/products";
-const API_URL_ORDER = "http://localhost:500/api/orders";
-const API_URL_ADMIN = "http://localhost:500/api/admin";
+const API_URL_AGRI_INPUT = "http://localhost:5000/api/agri-inputs";
+const API_URL_PRODUCT = "http://localhost:5000/api/products";
+const API_URL_ORDER = "http://localhost:5000/api/orders";
+const API_URL_ADMIN = "http://localhost:5000/api/admin";
 
 // Register buyer
 const registerBuyer = async (userData) => {

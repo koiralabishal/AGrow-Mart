@@ -319,7 +319,7 @@ const CartSection = ({ isOpen, onClose, cartItems, onRemoveFromCart, onPlaceOrde
                             item.image.name ? (
                               <div className="cart-item-image">
                                 <img 
-                                  src={`http://localhost:500/uploads/products/${item.image.name}`} 
+                                  src={`http://localhost:5000/uploads/products/${item.image.name}`} 
                                   alt={item.name}
                                   onError={(e) => {
                                     e.target.onerror = null;

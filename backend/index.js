@@ -27,7 +27,7 @@ const app = express();
 //   debug: true
 // }));
 
-const PORT = process.env.PORT || 500;
+const PORT = process.env.PORT || 5000;
 connectDB();
 
 app.use(express.json());

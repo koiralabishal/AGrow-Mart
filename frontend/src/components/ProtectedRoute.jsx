@@ -33,7 +33,7 @@ const ProtectedRoute = ({ element, requiredRole }) => {
       const parsedUserData = JSON.parse(userData);
       
       // Directly check if user exists
-      const response = await axios.post('http://localhost:500/api/auth/check-user-exists', {
+      const response = await axios.post('http://localhost:5000/api/auth/check-user-exists', {
         email: parsedUserData.email,
         userType: userType
       });

@@ -77,7 +77,7 @@ const ProfileEditForm = ({ onClose, userType = 'buyer' }) => {
           if (picPath) {
             const imageUrl = picPath.startsWith('http') 
               ? picPath 
-              : `http://localhost:500${picPath}`;
+              : `http://localhost:5000${picPath}`;
             setPreviewImage(imageUrl);
           }
         }
@@ -126,7 +126,7 @@ const ProfileEditForm = ({ onClose, userType = 'buyer' }) => {
               if (picPath) {
                 const imageUrl = picPath.startsWith('http') 
                   ? picPath 
-                  : `http://localhost:500${picPath}`;
+                  : `http://localhost:5000${picPath}`;
                 setPreviewImage(imageUrl);
               }
             }

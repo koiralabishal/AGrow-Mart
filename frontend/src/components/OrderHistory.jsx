@@ -585,7 +585,7 @@ const OrderHistory = ({ onClose, onOrderDelete, userType = 'buyer' }) => {
                               <div className="product-image">
                                 {item.image && item.image.name ? (
                                   <img 
-                                    src={`http://localhost:500/uploads/products/${item.image.name}`}
+                                    src={`http://localhost:5000/uploads/products/${item.image.name}`}
                                     alt={item.name}
                                     onError={(e) => {
                                       e.target.onerror = null;

@@ -130,7 +130,7 @@ const FarmerProductSection = ({ dashboardType = 'farmer' }) => {
       // Construct the URL to the image
       // Using direct path from the database
       return <img 
-        src={`http://localhost:500/uploads/products/${product.image.name}`} 
+        src={`http://localhost:5000/uploads/products/${product.image.name}`} 
         alt={product.name} 
         onError={(e) => {
           e.target.onerror = null;

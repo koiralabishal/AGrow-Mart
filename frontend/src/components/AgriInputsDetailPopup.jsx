@@ -91,7 +91,7 @@ const AgriInputsDetailPopup = ({ product, onAddToCart, onClose }) => {
           <div className="product-image">
             {product.image && product.image.name ? (
               <img 
-                src={`http://localhost:500/uploads/products/${product.image.name}`}
+                src={`http://localhost:5000/uploads/products/${product.image.name}`}
                 alt={product.name}
                 onError={(e) => {
                   e.target.onerror = null;

@@ -799,13 +799,21 @@ const ReceivedOrders = ({ onClose, userType = 'farmer' }) => {
                             <div className="product-image">
                               <img 
                                 src={
-                                  item.image && typeof item.image === 'string' 
-                                    ? item.image.startsWith('http') 
-                                      ? item.image 
-                                      : `../uploads/products/${item.image}`
-                                    : '../placeholder-product.png'
+                                  item.image && item.image.name 
+                                    ? `http://localhost:5000/uploads/products/${item.image.name}`
+                                    : item.image && typeof item.image === 'string'
+                                      ? item.image.startsWith('http')
+                                        ? item.image
+                                        : `http://localhost:5000/uploads/products/${item.image}`
+                                      : '../placeholder-product.png'
                                 } 
                                 alt={item.name} 
+                                onError={(e) => {
+                                  e.target.onerror = null;
+                                  e.target.src = '../placeholder-product.png';
+                                }       
+                                } 
+                                
                               />
                             </div>
                             <div className="product-info">

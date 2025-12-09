@@ -97,7 +97,7 @@ const PaymentIntegration = ({ orderDetails, onPaymentSuccess, onCancel }) => {
         
         // Fallback to direct API call
         console.log('Falling back to direct API call');
-        const response = await fetch('http://localhost:500/api/orders/create', {
+        const response = await fetch('http://localhost:5000/api/orders/create', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
