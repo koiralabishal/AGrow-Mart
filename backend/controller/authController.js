@@ -45,7 +45,7 @@ export const registerBuyer = async (req, res) => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, "secret#koiralabishal123", {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
         expiresIn: "7d",
       });
 
@@ -69,10 +69,10 @@ export const registerBuyer = async (req, res) => {
     
 
    // Send email verification link with welcome message
-   const verificationLink = `http://localhost:5173/verify-token?token=${token}&email=${email}`;
+   const verificationLink = `${process.env.FRONTEND_URL}/verify-token?token=${token}&email=${email}`;
    const emailData = {
       //  from: '"Agro-Mart"<koiralabishal3@gmail.com>',
-       from: '"Agro-Mart"<jpt1896@gmail.com>',
+       from: `"Agro-Mart"<${process.env.EMAIL_USER}>`,
        to: email,
        subject: "Welcome to Agro-Mart as a Buyer - Verify Your Email",
        html: `
@@ -136,15 +136,10 @@ export const registerFarmer = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
    
-    // Create a document object with file details
-    const licenseDocument = {
-      name: req.file.filename,
-      path: req.file.path,
-      type: req.file.mimetype,
-      size: req.file.size
-    };
+    // Store document URL directly
+    const licenseDocument = req.file.path;
 
-    if(licenseDocument.size > 1024 * 1024 * 5){
+    if(req.file.size > 1024 * 1024 * 5){
       return res.json({success: false, message: 'License document must be less than 5MB'});
     }
 
@@ -162,7 +157,7 @@ export const registerFarmer = async (req, res) => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, "secret#koiralabishal123", {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
@@ -178,9 +173,9 @@ export const registerFarmer = async (req, res) => {
     });
 
     // Send email verification link with welcome message
-    const verificationLink = `http://localhost:5173/verify-token?token=${token}&email=${email}`;
+    const verificationLink = `${process.env.FRONTEND_URL}/verify-token?token=${token}&email=${email}`;
     const emailData = {
-      from: '"Agro-Mart"<koiralabishal3@gmail.com>',
+      from: `"Agro-Mart"<${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Welcome to Agro-Mart as a Farmer - Verify Your Email",
       html: `
@@ -241,15 +236,10 @@ export const registerSupplier = async (req, res) => {
     
     const hashedPassword = await bcrypt.hash(password, 10);
     
-    // Create a document object with file details
-    const businessCertificate = {
-      name: req.file.filename,
-      path: req.file.path,
-      type: req.file.mimetype,
-      size: req.file.size
-    };
+    // Store document URL directly
+    const businessCertificate = req.file.path;
 
-    if(businessCertificate.size > 1024 * 1024 * 2){
+    if(req.file.size > 1024 * 1024 * 2){
       return res.json({success: false, message: 'Business certificate must be less than 2MB'});
     }
 
@@ -267,7 +257,7 @@ export const registerSupplier = async (req, res) => {
     });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, "secret#koiralabishal123", {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
@@ -283,9 +273,9 @@ export const registerSupplier = async (req, res) => {
     });
 
     // Send email verification link with welcome message
-    const verificationLink = `http://localhost:5173/verify-token?token=${token}&email=${email}`;
+    const verificationLink = `${process.env.FRONTEND_URL}/verify-token?token=${token}&email=${email}`;
     const emailData = {
-      from: '"Agro-Mart"<koiralabishal3@gmail.com>',
+      from: `"Agro-Mart"<${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Welcome to Agro-Mart as a Supplier - Verify Your Email",
       html: `
@@ -342,7 +332,7 @@ export const login = async (req, res) => {
       return res.json({ success: false, message: "Invalid password" });
     }
 
-    const loginToken = jwt.sign({ id: user._id }, "secret#koiralabishal123", {
+    const loginToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
     res.cookie("loginToken", loginToken, {
@@ -467,7 +457,7 @@ export const sendPasswordResetOtp = async (req, res) => {
 
     // Send the OTP via email
     const emailData = {
-      from: '"Agro-Mart"<koiralabishal3@gmail.com>',
+      from: `"Agro-Mart"<${process.env.EMAIL_USER}>`,
       to: email,
       subject: 'Password Reset OTP',
       html:`

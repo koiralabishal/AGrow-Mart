@@ -81,26 +81,9 @@ const BuyerManagement = () => {
     }
     
     // Fix image path to ensure it works properly
-    // Handle case where image.path might be a full path or just a filename
-    let fileName;
-    if (image.path.includes('/')) {
-      fileName = image.path.split('/').pop();
-    } else if (image.path.includes('\\')) {
-      fileName = image.path.split('\\').pop();
-    } else {
-      fileName = image.path;
-    }
+    const imagePath = getImageUrl(image);
     
-    // Check if path already contains the directory structure
-    let imagePath;
-    if (image.path.includes('profiles/') || image.path.includes('profiles\\')) {
-      imagePath = `http://localhost:5000/uploads/${image.path.replace(/^.*profiles[/\\]/, 'profiles/')}`;
-    } else {
-      imagePath = `http://localhost:5000/uploads/profiles/${fileName}`;
-    }
-    
-    console.log('Original image path:', image.path);
-    console.log('Extracted filename:', fileName);
+    console.log('Original image path:', image);
     console.log('Constructed image URL:', imagePath);
       
     return (

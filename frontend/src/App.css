@@ -5,7 +5,6 @@
 }
 
 body, html {
-  height: 100%;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -15,13 +14,11 @@ body, html {
 
 
 .landing-container {
-  height: 100vh;
   width: 100vw;
   background: url('./assets/bg.png') no-repeat center center;
   background-size: cover;
   position: relative;
   overflow-x: hidden;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }

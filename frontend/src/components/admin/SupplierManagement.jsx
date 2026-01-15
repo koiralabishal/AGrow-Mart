@@ -99,30 +99,10 @@ const SupplierManagement = () => {
         </div>
       );
     }
-    
-    // Fix document path to ensure it works properly
-    // Handle case where document.path might be a full path or just a filename
-    let fileName;
-    if (document.path.includes('/')) {
-      fileName = document.path.split('/').pop();
-    } else if (document.path.includes('\\')) {
-      fileName = document.path.split('\\').pop();
-    } else {
-      fileName = document.path;
-    }
-    
-    // Check if path already contains the directory structure
-    let documentPath;
-    if (document.path.includes('documents/') || document.path.includes('documents\\')) {
-      documentPath = `http://localhost:5000/uploads/${document.path.replace(/^.*documents[/\\]/, 'documents/')}`;
-    } else {
-      documentPath = `http://localhost:5000/uploads/documents/${fileName}`;
-    }
-    
-    console.log('Original document path:', document.path);
-    console.log('Extracted filename:', fileName);
-    console.log('Constructed document URL:', documentPath);
       
+    // Document is now stored as a string URL
+    const documentPath = document.path || document;
+          
     return (
       <div className="document-viewer-overlay" onClick={() => setViewDocument(null)}>
         <div className="document-viewer-content" onClick={e => e.stopPropagation()}>

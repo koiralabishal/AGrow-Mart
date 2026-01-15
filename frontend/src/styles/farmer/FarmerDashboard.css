@@ -1,0 +1,36 @@
+.farmer-dashboard {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* background-color: #1b4332; */
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-content {
+  flex: 1;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+
+main {
+  flex: 1;
+  width: 100%;
+  position: relative;
+  min-height: auto;
+}
+
+/* ProductForm will be rendered as a modal overlay - no need for positioning adjustments */
+
+/* ProductForm Styling */
+/* .product-form-container {
+  position: relative;
+  z-index: 100;
+  margin: 2rem auto;
+  max-width: 800px;
+} */
+

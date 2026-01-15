@@ -1,6 +1,0 @@
-@echo off
-echo Navigating to frontend directory...
-cd /d D:\AgroMart\frontend
-echo Starting frontend development server...
-call npm run dev
-pause 

@@ -5,6 +5,7 @@ import authService from '../../api';
 import '../../styles/admin/BuyerManagement.css';
 import { FaTrash, FaSync, FaSearch, FaFilter, FaDownload, FaCheckCircle, FaTimesCircle, FaSeedling, FaEye, FaCheck, FaTimes } from 'react-icons/fa';
 import PropTypes from 'prop-types';
+import { getImageUrl } from '../../utils/imageUtils';
 
 const FarmerManagement = () => {
   const [farmers, setFarmers] = useState([]);
@@ -82,7 +83,9 @@ const FarmerManagement = () => {
 
   // Document viewer component
   const DocumentViewer = ({ document }) => {
-    if (!document || !document.path) {
+    const hasDocument = document && (typeof document === 'string' || document.path);
+    
+    if (!hasDocument) {
       console.log('No document or path found');
       return (
         <div className="document-viewer-overlay" onClick={() => setViewDocument(null)}>
@@ -99,27 +102,10 @@ const FarmerManagement = () => {
       );
     }
     
-    // Fix document path to ensure it works properly
-    // Handle case where document.path might be a full path or just a filename
-    let fileName;
-    if (document.path.includes('/')) {
-      fileName = document.path.split('/').pop();
-    } else if (document.path.includes('\\')) {
-      fileName = document.path.split('\\').pop();
-    } else {
-      fileName = document.path;
-    }
-    
-    // Check if path already contains the directory structure
-    let documentPath;
-    if (document.path.includes('documents/') || document.path.includes('documents\\')) {
-      documentPath = `http://localhost:5000/uploads/${document.path.replace(/^.*documents[/\\]/, 'documents/')}`;
-    } else {
-      documentPath = `http://localhost:5000/uploads/documents/${fileName}`;
-    }
+    const rawPath = document.path || document;
+    const documentPath = getImageUrl(rawPath);
     
     console.log('Original document path:', document.path);
-    console.log('Extracted filename:', fileName);
     console.log('Constructed document URL:', documentPath);
       
     return (
@@ -147,9 +133,12 @@ const FarmerManagement = () => {
 
   // PropTypes for DocumentViewer
   DocumentViewer.propTypes = {
-    document: PropTypes.shape({
-      path: PropTypes.string
-    })
+    document: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        path: PropTypes.string
+      })
+    ])
   };
 
   // Filter farmers based on search term and filter status

@@ -4,6 +4,8 @@
   },
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "cd frontend && npm run build",
+    "build-and-dev": "npm run build && npm run dev",
     "server": "cd backend && npm start",
     "client": "cd frontend && npm run dev"
   }

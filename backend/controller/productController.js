@@ -25,15 +25,10 @@ export const addProduct = async (req, res) => {
       return res.json({ success: false, message: "Product image is required" });
     }
     
-    // Create image object with file details from multer
-    const image = {
-      name: req.file.filename,
-      path: req.file.path,
-      type: req.file.mimetype,
-      size: req.file.size
-    };
+    // Store image URL directly from Cloudinary
+    const image = req.file.path;
     
-    if (image.size > 1024 * 1024 * 2) {
+    if (req.file.size > 1024 * 1024 * 2) {
       return res.json({ success: false, message: "Product image must be less than 2MB" });
     }
     
@@ -130,20 +125,26 @@ export const getFarmersWithProducts = async (req, res) => {
         if (farmerUser && farmerUser.profilePic) {
           // Check if profilePic is an object with path property
           if (typeof farmerUser.profilePic === 'object' && farmerUser.profilePic.path) {
-            // If path starts with '/', prepend the server URL
+            // If path starts with '/', prepend the server URL (BACKWARD COMPATIBILITY)
             if (farmerUser.profilePic.path.startsWith('/')) {
-              profilePicUrl = `http://localhost:5000${farmerUser.profilePic.path}`;
+              // For Vercel, this won't really work for old images, but keeping logic safe
+              profilePicUrl = farmerUser.profilePic.path; 
             } else if (farmerUser.profilePic.path.startsWith('http')) {
-              // If it's already a full URL, use it directly
+              // If it's already a full URL (Cloudinary), use it directly
               profilePicUrl = farmerUser.profilePic.path;
             }
           } else if (typeof farmerUser.profilePic === 'string') {
             // If profilePic is a string (direct URL), use it
             profilePicUrl = farmerUser.profilePic;
           }
-        } else if (farmer.sampleProduct.image && farmer.sampleProduct.image.name) {
-          // Fallback to product image if no profile pic is available
-          profilePicUrl = `http://localhost:5000/uploads/products/${farmer.sampleProduct.image.name}`;
+        } else if (farmer.sampleProduct.image) {
+          // Fallback to product image if no profile pic
+          if (farmer.sampleProduct.image.path && farmer.sampleProduct.image.path.startsWith('http')) {
+             profilePicUrl = farmer.sampleProduct.image.path;
+          } else if (farmer.sampleProduct.image.name) {
+             // Fallback for old local images
+             profilePicUrl = `/uploads/products/${farmer.sampleProduct.image.name}`;
+          }
         }
         
         return {

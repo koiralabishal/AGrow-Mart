@@ -15,12 +15,8 @@ const userSchema = new mongoose.Schema({
 
     userType: {type: String, enum: ['buyer', 'farmer', 'supplier', 'admin'], required: true},
     profilePic: {
-        type: Object,
-        // default: null,
-        // name: String,
-        // path: String,
-        // type: String,
-        // size: Number
+        type: String,
+        default: ""
     },
     // Farmer specific fields
     farmName: {
@@ -50,11 +46,11 @@ const userSchema = new mongoose.Schema({
     
     // Document references - file paths to uploaded documents
     licenseDocument: {
-        type: Object, 
+        type: String, 
         required: function() { return this.userType === 'farmer'; }
     },
     businessCertificate: {
-        type: Object, 
+        type: String, 
         required: function() { return this.userType === 'supplier'; }
     },
 

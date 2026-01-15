@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema({
     trim: true
   },
   image: { 
-    type: Object, 
+    type: String, 
     required: true
   },
   farmerEmail: {
